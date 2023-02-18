@@ -6,12 +6,40 @@
 
 :root {
   --white: hsl(0, 0%, 100%);
-  --background-color: hsl(0, 0%, 98%);
+
+  --hero-img: url("./images/bg-mobile-light.jpg");
+  --body-bg: hsl(0, 0%, 98%);
+  --todo-container: hsl(0, 0%, 100%);
+  --todo-container-shadow: rgba(134, 136, 155, 0.15) 0px 130px 70px -30px;
+  --todo-filter-text: hsl(236, 9%, 61%);
+
+  --light-text: hsl(233, 11%, 84%);
+  --normal-text: hsl(236, 9%, 61%);
+  --dark-text: hsl(235, 19%, 35%);
+
   --icon-border-color: hsl(233, 11%, 84%);
-  --regular-gray: hsl(236, 9%, 61%);
-  --dark-gray: hsl(235, 19%, 35%);
-  --light-gray: hsl(233, 11%, 84%);
-  --check-Background: linear-gradient #57ddff to #c058f3;
+  --delete-btn: hsl(235, 19%, 35%);
+
+  --sun-display: none;
+  --moon-display: block;
+}
+
+html[data-theme="dark"] {
+  --body-bg: hsl(235, 21%, 11%);
+  --todo-container: hsl(235deg 24% 19%);
+  --todo-container-shadow: rgb(0 0 0 / 40%) 0px 130px 70px -30px;
+  --todo-filter-text: hsl(234, 11%, 52%);
+
+  --icon-border-color: hsl(234, 11%, 52%);
+
+  --light-text: hsl(233, 14%, 35%);
+  --normal-text: hsl(234, 11%, 52%);
+  --dark-text: hsl(234, 39%, 85%);
+
+  --delete-btn: hsl(233, 14%, 35%);
+
+  --sun-display: block;
+  --moon-display: none;
 }
 
 @font-face {
@@ -28,7 +56,7 @@
 
 body {
   font-family: "Josefin", sans-serif;
-  background-color: var(--background-color);
+  background-color: var(--body-bg);
 }
 
 input {
@@ -36,6 +64,8 @@ input {
   background: none;
   font-family: inherit;
   color: inherit;
+  outline: none;
+  caret-color: hsl(220, 98%, 61%);
 }
 
 button {
@@ -43,9 +73,14 @@ button {
   background: none;
   font-size: inherit;
   font-family: inherit;
+  font-weight: inherit;
   color: inherit;
   cursor: pointer;
 }
+
+/* HEADER */
+
+/* HEADER */
 
 .header-background-image {
   position: absolute;
@@ -71,8 +106,6 @@ button {
   margin-top: 70px;
 }
 
-/* HEADER */
-
 .todo-header {
   display: flex;
   justify-content: space-between;
@@ -85,11 +118,16 @@ button {
   color: var(--white);
 }
 
-.theme-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
+.theme-switch-btn {
   cursor: pointer;
+}
+
+.sun-icon {
+  display: var(--sun-display);
+}
+
+.moon-icon {
+  display: var(--moon-display);
 }
 
 /* TODO INPUT */
@@ -100,7 +138,7 @@ button {
   gap: 6px;
 
   border-radius: 6px;
-  background-color: var(--white);
+  background-color: var(--todo-container);
   padding: 18px 20px;
   margin-top: 45px;
 }
@@ -109,11 +147,11 @@ button {
   font-size: 18px;
   width: 100%;
   padding: 4px 8px;
-  color: var(--dark-gray);
+  color: var(--dark-text);
 }
 
 .add-todo-input::placeholder {
-  color: var(--regular-gray);
+  color: var(--normal-text);
 
   font-size: 14px;
 }
@@ -138,13 +176,13 @@ button {
   margin: 24px 0;
   border-radius: 10px;
   overflow: hidden;
-  background-color: var(--white);
+  background-color: var(--todo-container);
 
-  box-shadow: rgba(134, 136, 155, 0.15) 0px 130px 70px -30px;
+  box-shadow: var(--todo-container-shadow);
 }
 
 .todo-list {
-  color: var(--dark-gray);
+  color: var(--dark-text);
   list-style-type: none;
 }
 
@@ -154,17 +192,16 @@ button {
   justify-content: space-between;
 
   padding: 18px 20px;
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--light-text);
   cursor: pointer;
 }
 
 .todo-item.done {
-  color: var(--light-gray);
+  color: var(--light-text);
   text-decoration: line-through;
 }
 
 .todo-item.done .icon {
-  background-color: var(--check-Background);
   background: rgb(87, 221, 255);
   background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
 }
@@ -181,9 +218,13 @@ button {
   mask-composite: exclude;
 }
 
-.todo-item.done .icon::before,
 .todo-item:hover .icon::before {
   background: linear-gradient(116deg, #57ddff, #c058f3);
+}
+
+.todo-item.done .icon,
+.todo-item:hover .icon {
+  border: 0;
 }
 
 .todo-item div:first-child {
@@ -192,10 +233,18 @@ button {
   gap: 12px;
 }
 
+.todo-item .icon-image {
+  display: none;
+}
+
+.todo-item.done .icon-image {
+  display: flex;
+}
+
 .delete-btn {
   width: 18px;
   height: 18px;
-  fill: var(--dark-gray);
+  fill: var(--delete-btn);
 }
 
 .todo-footer {
@@ -204,7 +253,7 @@ button {
 
   padding: 18px 20px;
   font-size: 16px;
-  color: var(--regular-gray);
+  color: var(--normal-text);
 }
 
 /* TODO FILTER */
@@ -213,14 +262,15 @@ button {
   justify-content: center;
   gap: 16px;
 
+  font-weight: 700;
   padding: 18px 20px;
-  color: var(--dark-gray);
-  background-color: var(--white);
+  color: var(--todo-filter-text);
+  background-color: var(--todo-container);
   border-radius: 6px;
 }
 
 .dnd-tip {
-  color: var(--regular-gray);
+  color: var(--normal-text);
   text-align: center;
   margin-top: 50px;
 }
