@@ -17,5 +17,78 @@
     <title>Frontend Mentor | Todo app</title>
   </head>
 
-  <body></body>
+  <body>
+    <div class="header-background-image"></div>
+    <div class="container">
+      <header class="todo-header">
+        <h1 class="todo-title">todo</h1>
+        <img class="theme-icon" src="./images/icon-moon.svg" alt="moon icon" />
+      </header>
+
+      <div class="add-todo">
+        <div class="add-icon icon"></div>
+        <input
+          class="add-todo-input"
+          type="text"
+          placeholder="Create a new todo..."
+        />
+      </div>
+
+      <div class="todo-container">
+        <ul class="todo-list">
+          <li class="todo-item done">
+            <div>
+              <div class="icon">
+                <img src="./images/icon-check.svg" alt="check icon" />
+              </div>
+              <p>Jog around the park 3x</p>
+            </div>
+            <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+              />
+            </svg>
+          </li>
+          <li class="todo-item done">
+            <div>
+              <div class="icon">
+                <img src="./images/icon-check.svg" alt="check icon" />
+              </div>
+              <p>Read for 1 hour</p>
+            </div>
+            <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+              />
+            </svg>
+          </li>
+          <li class="todo-item">
+            <div>
+              <div class="icon">
+                <img src="./images/icon-check.svg" alt="check icon" />
+              </div>
+              <p>Complete online JavaScript course</p>
+            </div>
+            <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+              />
+            </svg>
+          </li>
+        </ul>
+        <div class="todo-footer">
+          <p class="todo-left">3 items left</p>
+          <button class="clear-btn">clear completed</button>
+        </div>
+      </div>
+
+      <div class="todo-filter">
+        <button>All</button>
+        <button>Active</button>
+        <button>Completed</button>
+      </div>
+
+      <p class="dnd-tip">Drag and drop to reorder list</p>
+    </div>
+  </body>
 </html>
