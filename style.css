@@ -78,6 +78,12 @@ button {
   cursor: pointer;
 }
 
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 /* HEADER */
 
 /* HEADER */
@@ -156,6 +162,10 @@ button {
   font-size: 14px;
 }
 
+.add-icon {
+  cursor: pointer;
+}
+
 .icon {
   position: relative;
   display: flex;
@@ -179,6 +189,10 @@ button {
   background-color: var(--todo-container);
 
   box-shadow: var(--todo-container-shadow);
+}
+
+.todo-container.hide {
+  display: none;
 }
 
 .todo-list {
@@ -269,8 +283,16 @@ button {
   border-radius: 6px;
 }
 
+.todo-filter.hide {
+  display: none;
+}
+
 .dnd-tip {
   color: var(--normal-text);
   text-align: center;
   margin-top: 50px;
+}
+
+.dnd-tip.hide {
+  display: none;
 }
