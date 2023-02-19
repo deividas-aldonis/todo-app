@@ -32,7 +32,7 @@ themeSwitchBtn.addEventListener("click", (e) => {
 });
 
 // CRUD logic
-addBtn.addEventListener("click", (e) => {
+addBtn.addEventListener("click", () => {
   const inputValue = addInput.value.trim();
 
   if (!inputValue) return;
@@ -64,7 +64,8 @@ addBtn.addEventListener("click", (e) => {
   todoAddBtn.addEventListener("click", completeTodo);
   todoDeleteBtn.addEventListener("click", deleteTodo);
 
-  updateTodoLeft("add");
+  updateTodoUI();
+  addTodoLeft();
 });
 
 function completeTodo(e) {
@@ -73,8 +74,10 @@ function completeTodo(e) {
   if (todoItem) {
     if (todoItem.classList.contains("done")) {
       todoItem.classList.remove("done");
+      addTodoLeft();
     } else {
       todoItem.classList.add("done");
+      removeTodoLeft();
     }
   }
 }
@@ -82,27 +85,43 @@ function completeTodo(e) {
 function deleteTodo(e) {
   const todoItem = e.target.closest(".todo-item");
   todoItem.remove();
-  updateTodoLeft("minus");
+  updateTodoUI();
+
+  if (!todoItem.classList.contains("done")) {
+    removeTodoLeft();
+  }
 }
 
-function updateTodoLeft(operation) {
-  if (operation === "add") {
-    todoLeftItemCounter++;
+function updateTodoUI() {
+  const todoItems = document.querySelectorAll(".todo-item").length;
 
-    if (todoLeftItemCounter === 1) {
-      todoItemsLeft.textContent = "1 item left";
-    } else if (todoLeftItemCounter > 1) {
-      todoItemsLeft.textContent = `${todoLeftItemCounter} items left`;
-    }
+  if (todoItems === 0) {
+    todoContainer.classList.add("hide");
+    todoDndTip.classList.add("hide");
+    todoFilter.classList.add("hide");
+  } else if (todoItems > 0 && todoContainer.classList.contains("hide")) {
+    todoContainer.classList.remove("hide");
+    todoDndTip.classList.remove("hide");
+    todoFilter.classList.remove("hide");
+  }
+}
+
+function addTodoLeft() {
+  todoLeftItemCounter++;
+
+  if (todoLeftItemCounter === 1) {
+    todoItemsLeft.textContent = "1 item left";
   } else {
-    todoLeftItemCounter--;
+    todoItemsLeft.textContent = `${todoLeftItemCounter} items left`;
+  }
+}
 
-    if (todoLeftItemCounter === 0) {
-      todoItemsLeft.textContent = `All completed`;
-    } else if (todoLeftItemCounter === 1) {
-      todoItemsLeft.textContent = `1 item left`;
-    } else {
-      todoItemsLeft.textContent = `${todoLeftItemCounter} items left`;
-    }
+function removeTodoLeft() {
+  todoLeftItemCounter--;
+
+  if (todoLeftItemCounter === 1) {
+    todoItemsLeft.textContent = "1 item left";
+  } else {
+    todoItemsLeft.textContent = `${todoLeftItemCounter} items left`;
   }
 }
