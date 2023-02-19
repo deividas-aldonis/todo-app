@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+
 const themeSwitchBtn = document.querySelector(".theme-switch-btn");
 const headerBackgroundImage = document.querySelector(
   ".header-background-image"
@@ -12,6 +14,7 @@ const addBtn = document.querySelector(".add-icon");
 const addInput = document.querySelector(".add-todo-input");
 
 let todoLeftItemCounter = 0;
+const todos = [];
 
 // Theme switcher logic
 themeSwitchBtn.addEventListener("click", (e) => {
@@ -37,8 +40,10 @@ addBtn.addEventListener("click", () => {
 
   if (!inputValue) return;
 
-  const listItem = `<li class="todo-item">
-                      <div >
+  const id = uuidv4();
+
+  const listItem = `<li class="todo-item" id=${id} >
+                      <div>
                         <div class="icon complete-todo-btn prevent-select">
                           <img
                             class="icon-image"
@@ -66,6 +71,8 @@ addBtn.addEventListener("click", () => {
 
   updateTodoUI();
   addTodoLeft();
+  addInput.value = "";
+  todos.push(newlyAddedTodo);
 });
 
 function completeTodo(e) {
@@ -85,6 +92,10 @@ function completeTodo(e) {
 function deleteTodo(e) {
   const todoItem = e.target.closest(".todo-item");
   todoItem.remove();
+
+  const index = todos.findIndex((t) => t.id === todoItem.id);
+  todos.splice(index, 1);
+
   updateTodoUI();
 
   if (!todoItem.classList.contains("done")) {
@@ -125,3 +136,27 @@ function removeTodoLeft() {
     todoItemsLeft.textContent = `${todoLeftItemCounter} items left`;
   }
 }
+
+todoFilter.addEventListener("click", (e) => {
+  const target = e.target.tagName.toLowerCase();
+
+  todoFilter.querySelectorAll("button").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+
+  if (target === "button") {
+    e.target.classList.add("active");
+
+    const filter = e.target.dataset.filter;
+
+    if (filter === "completed") {
+      const completed = todos.filter((t) => t.classList.contains("done"));
+      todoList.replaceChildren(...completed);
+    } else if (filter === "active") {
+      const active = todos.filter((t) => !t.classList.contains("done"));
+      todoList.replaceChildren(...active);
+    } else {
+      todoList.replaceChildren(...todos);
+    }
+  }
+});

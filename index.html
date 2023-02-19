@@ -12,7 +12,7 @@
       href="./images/favicon-32x32.png"
     />
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="app.js" defer></script>
+    <script type="module" src="app.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Frontend Mentor | Todo app</title>
   </head>
@@ -21,15 +21,21 @@
     <div class="header-background-image"></div>
     <div class="container">
       <header class="todo-header">
-        <h1 class="todo-title">todo</h1>
-        <div class="theme-switch-btn" data-current-theme="light">
+        <h1 class="todo-title prevent-select">todo</h1>
+        <div class="theme-switch-btn prevent-select" data-current-theme="light">
           <img class="moon-icon" src="./images/icon-moon.svg" alt="moon icon" />
           <img class="sun-icon" src="./images/icon-sun.svg" alt="sun icon" />
         </div>
       </header>
 
       <div class="add-todo">
-        <div class="add-icon icon"></div>
+        <div class="add-icon icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path
+              d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+            />
+          </svg>
+        </div>
         <input
           class="add-todo-input"
           type="text"
@@ -38,52 +44,17 @@
       </div>
 
       <div class="todo-container hide">
-        <ul class="todo-list">
-          <!-- <li class="todo-item done">
-            <div>
-              <div class="icon">
-                <img
-                  class="icon-image"
-                  src="./images/icon-check.svg"
-                  alt="check icon"
-                />
-              </div>
-              <p>Read for 1 hour</p>
-            </div>
-            <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-              />
-            </svg>
-          </li>
-          <li class="todo-item">
-            <div>
-              <div class="icon">
-                <img
-                  class="icon-image"
-                  src="./images/icon-check.svg"
-                  alt="check icon"
-                />
-              </div>
-              <p>Complete online JavaScript course</p>
-            </div>
-            <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-              />
-            </svg>
-          </li> -->
-        </ul>
+        <ul class="todo-list"></ul>
         <div class="todo-footer">
           <p class="todo-left">0 items left</p>
           <button class="clear-btn">clear completed</button>
         </div>
       </div>
 
-      <div class="todo-filter hide">
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+      <div class="todo-filter hide prevent-select">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="active">Active</button>
+        <button data-filter="completed">Completed</button>
       </div>
 
       <p class="dnd-tip hide">Drag and drop to reorder list</p>

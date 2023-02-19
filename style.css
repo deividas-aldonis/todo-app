@@ -19,6 +19,7 @@
 
   --icon-border-color: hsl(233, 11%, 84%);
   --delete-btn: hsl(235, 19%, 35%);
+  --bright-blue: hsl(220, 98%, 61%);
 
   --sun-display: none;
   --moon-display: block;
@@ -30,13 +31,13 @@ html[data-theme="dark"] {
   --todo-container-shadow: rgb(0 0 0 / 40%) 0px 130px 70px -30px;
   --todo-filter-text: hsl(234, 11%, 52%);
 
-  --icon-border-color: hsl(234, 11%, 52%);
-
   --light-text: hsl(233, 14%, 35%);
   --normal-text: hsl(234, 11%, 52%);
   --dark-text: hsl(234, 39%, 85%);
 
+  --icon-border-color: hsl(234, 11%, 52%);
   --delete-btn: hsl(233, 14%, 35%);
+  --bright-blue: hsl(220, 98%, 61%);
 
   --sun-display: block;
   --moon-display: none;
@@ -83,8 +84,6 @@ button {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
-
-/* HEADER */
 
 /* HEADER */
 
@@ -162,10 +161,6 @@ button {
   font-size: 14px;
 }
 
-.add-icon {
-  cursor: pointer;
-}
-
 .icon {
   position: relative;
   display: flex;
@@ -178,6 +173,29 @@ button {
 
   border: 1px solid var(--icon-border-color);
   border-radius: 50%;
+}
+
+.add-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background: rgb(87, 221, 255);
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
+
+  transition: transform 0.1s ease;
+  cursor: pointer;
+}
+
+.add-icon:active {
+  transform: scale(0.95);
+}
+
+.add-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: var(--white);
 }
 
 /* TODO CONTAINER */
@@ -270,6 +288,14 @@ button {
   color: var(--normal-text);
 }
 
+.clear-btn {
+  transition: color 0.1s ease;
+}
+
+.clear-btn:hover {
+  color: var(--dark-text);
+}
+
 /* TODO FILTER */
 .todo-filter {
   display: flex;
@@ -285,6 +311,18 @@ button {
 
 .todo-filter.hide {
   display: none;
+}
+
+.todo-filter button {
+  transition: color 0.1s ease;
+}
+
+.todo-filter button:hover {
+  color: var(--dark-text);
+}
+
+.todo-filter button.active {
+  color: var(--bright-blue);
 }
 
 .dnd-tip {
