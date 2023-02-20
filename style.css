@@ -228,6 +228,10 @@ button {
   cursor: pointer;
 }
 
+.todo-item.hide {
+  display: none;
+}
+
 .todo-item.done {
   color: var(--light-text);
   text-decoration: line-through;
