@@ -345,7 +345,7 @@ button {
 
 /* DND CLASSES */
 
-.sortable-ghost {
+/* .sortable-ghost {
   background: rgb(87, 221, 255);
   background: linear-gradient(
     166deg,
@@ -353,7 +353,7 @@ button {
     rgba(192, 88, 243, 1) 100%
   );
   opacity: 1;
-}
+} */
 
 .todo-list.dragging .todo-item:hover .icon::before {
   padding: 0px;
@@ -367,14 +367,12 @@ button {
 .todo-list.dragging .todo-item.done:hover .icon {
   border: none;
 }
-/* 
-.sortable-chosen.sortable-ghost {
-  opacity: 0;
-}
-.sortable-fallback {
-  opacity: 1 !important;
-} */
 
-.sortable-drag {
+/* Hidden drag ghost list */
+.todo-list li {
+  background-color: var(--todo-container);
+}
+/* Hidden ghost in this list */
+.todo-list .sortable-drag {
   opacity: 0;
 }
