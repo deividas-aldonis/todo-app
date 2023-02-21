@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
 
+    <!-- Fix button click on mobile -->
+    <!-- Hide ghost image on drag -->
+    <!-- Add desktop layout -->
+
     <link
       rel="icon"
       type="image/png"
@@ -64,20 +68,24 @@
     </div>
     <template>
       <div>
-        <div class="icon complete-todo-btn prevent-select ignore-drag">
-          <img
-            class="icon-image"
-            src="./images/icon-check.svg"
-            alt="check icon"
-          />
-        </div>
+        <button class="complete-todo-btn">
+          <div class="icon prevent-select ignore-drag">
+            <img
+              class="icon-image"
+              src="./images/icon-check.svg"
+              alt="check icon"
+            />
+          </div>
+        </button>
         <p></p>
       </div>
-      <svg class="delete-btn ignore-drag" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-        />
-      </svg>
+      <div class="delete-btn">
+        <svg class="delete ignore-drag" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+          />
+        </svg>
+      </div>
     </template>
   </body>
 </html>

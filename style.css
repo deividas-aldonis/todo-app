@@ -223,7 +223,7 @@ button {
   align-items: center;
   justify-content: space-between;
 
-  padding: 18px 20px;
+  padding: 9px 10px;
   border-bottom: 1px solid var(--light-text);
   cursor: pointer;
 }
@@ -266,7 +266,6 @@ button {
 .todo-item div:first-child {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .todo-item .icon-image {
@@ -277,7 +276,7 @@ button {
   display: flex;
 }
 
-.delete-btn {
+.delete {
   width: 18px;
   height: 18px;
   fill: var(--delete-btn);
@@ -339,6 +338,11 @@ button {
   display: none;
 }
 
+.complete-todo-btn,
+.delete-btn {
+  padding: 12px;
+}
+
 /* DND CLASSES */
 
 .sortable-ghost {
@@ -362,4 +366,15 @@ button {
 
 .todo-list.dragging .todo-item.done:hover .icon {
   border: none;
+}
+/* 
+.sortable-chosen.sortable-ghost {
+  opacity: 0;
+}
+.sortable-fallback {
+  opacity: 1 !important;
+} */
+
+.sortable-drag {
+  opacity: 0;
 }
