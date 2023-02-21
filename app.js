@@ -22,6 +22,25 @@ createTodoBtn.addEventListener("click", createTodo);
 clearBtn.addEventListener("click", clearCompleted);
 todoFilter.addEventListener("click", filterTodos);
 
+Sortable.create(todoList, {
+  animation: 150,
+  delayOnTouchOnly: true,
+  filter: ".ignore-drag",
+
+  ghostClass: "sortable-ghost",
+  chosenClass: "sortable-chosen",
+  dragClass: "sortable-drag",
+
+  onStart: function (evt) {
+    todoList.classList.add("dragging");
+  },
+
+  onEnd: function (evt) {
+    todos = [...todoList.children];
+    todoList.classList.remove("dragging");
+  },
+});
+
 function createTodo() {
   const temp = document.getElementsByTagName("template")[0];
   const clone = temp.content.cloneNode(true);
@@ -114,7 +133,7 @@ function clearCompleted() {
 function filterTodos(e) {
   const clicked = e.target.tagName.toLowerCase();
 
-  if (!clicked === "button") return;
+  if (clicked === "div") return;
 
   [...e.target.parentElement.children].forEach((btn) => {
     btn.classList.remove("active");
@@ -138,7 +157,6 @@ function filterTodos(e) {
   }
 }
 
-// Theme switcher logic
 themeSwitchBtn.addEventListener("click", (e) => {
   const target = e.currentTarget;
   const currentTheme = target.dataset.currentTheme;

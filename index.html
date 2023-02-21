@@ -12,7 +12,10 @@
       href="./images/favicon-32x32.png"
     />
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
     <script type="module" src="app.js"></script>
+
     <link rel="stylesheet" href="style.css" />
     <title>Frontend Mentor | Todo app</title>
   </head>
@@ -61,7 +64,7 @@
     </div>
     <template>
       <div>
-        <div class="icon complete-todo-btn prevent-select">
+        <div class="icon complete-todo-btn prevent-select ignore-drag">
           <img
             class="icon-image"
             src="./images/icon-check.svg"
@@ -70,7 +73,7 @@
         </div>
         <p></p>
       </div>
-      <svg class="delete-btn" xmlns="http://www.w3.org/2000/svg">
+      <svg class="delete-btn ignore-drag" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
         />

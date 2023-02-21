@@ -338,3 +338,28 @@ button {
 .dnd-tip.hide {
   display: none;
 }
+
+/* DND CLASSES */
+
+.sortable-ghost {
+  background: rgb(87, 221, 255);
+  background: linear-gradient(
+    166deg,
+    rgba(87, 221, 255, 1) 0%,
+    rgba(192, 88, 243, 1) 100%
+  );
+  opacity: 1;
+}
+
+.todo-list.dragging .todo-item:hover .icon::before {
+  padding: 0px;
+  background: none;
+}
+
+.todo-list.dragging .todo-item:hover .icon {
+  border: 1px solid var(--icon-border-color);
+}
+
+.todo-list.dragging .todo-item.done:hover .icon {
+  border: none;
+}
