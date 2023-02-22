@@ -35,11 +35,14 @@ Sortable.create(todoList, {
 
   onStart: function (evt) {
     todoList.classList.add("dragging");
+    evt.item.classList.add("start-position");
   },
 
   onEnd: function (evt) {
-    todos = [...todoList.children];
     todoList.classList.remove("dragging");
+    evt.item.classList.remove("start-position");
+
+    todos = [...todoList.children];
     localStorage.setItem("todos", todoList.innerHTML);
   },
 });

@@ -238,6 +238,9 @@ button {
   list-style-type: none;
 }
 
+.todo-list.dragging .todo-item {
+}
+
 .todo-item {
   display: flex;
   align-items: center;
@@ -372,6 +375,15 @@ button {
 
 .dnd-tip.hide {
   display: none;
+}
+
+.sortable-chosen {
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
+  opacity: 0.5 !important;
+}
+
+.sortable-drag {
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) {
