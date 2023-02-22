@@ -40,8 +40,53 @@ Sortable.create(todoList, {
   onEnd: function (evt) {
     todos = [...todoList.children];
     todoList.classList.remove("dragging");
+    localStorage.setItem("todos", todoList.innerHTML);
   },
 });
+
+function checkForATheme() {
+  const theme = localStorage.getItem("theme");
+
+  if (!theme) {
+    headerDesktopBg.classList.remove("hide");
+    headerMobileBg.classList.remove("hide");
+    return;
+  }
+
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeSwitchBtn.setAttribute("data-current-theme", "dark");
+    headerMobileBg.style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
+    headerDesktopBg.style.backgroundImage =
+      'url("./images/bg-desktop-dark.jpg")';
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    themeSwitchBtn.setAttribute("data-current-theme", "light");
+    headerMobileBg.style.backgroundImage =
+      'url("./images/bg-mobile-light.jpg")';
+    headerDesktopBg.style.backgroundImage =
+      'url("./images/bg-desktop-light.jpg")';
+  }
+
+  headerDesktopBg.classList.remove("hide");
+  headerMobileBg.classList.remove("hide");
+}
+checkForATheme();
+
+function checkForTodos() {
+  const localStorageTodos = localStorage.getItem("todos");
+  if (!localStorageTodos) return;
+
+  const parser = new DOMParser();
+  const parsedHTML = parser.parseFromString(localStorageTodos, "text/html");
+  const liElements = [...parsedHTML.querySelectorAll(".todo-item")];
+  todos = liElements;
+
+  addEventListeners();
+  renderTodos();
+  updateLeftItemCounter();
+}
+checkForTodos();
 
 function createTodo() {
   const temp = document.getElementsByTagName("template")[0];
@@ -64,9 +109,11 @@ function createTodo() {
   completeBtn.addEventListener("click", completeTodo);
 
   todos.push(li);
+  addInput.value = "";
 
   renderTodos();
   updateLeftItemCounter();
+  addToLocalStorage();
 }
 
 function renderTodos() {
@@ -91,6 +138,7 @@ function removeTodo(e) {
 
   renderTodos();
   updateLeftItemCounter();
+  addToLocalStorage();
 }
 
 function completeTodo(e) {
@@ -111,6 +159,7 @@ function completeTodo(e) {
   }
 
   updateLeftItemCounter();
+  addToLocalStorage();
 }
 
 function updateLeftItemCounter() {
@@ -130,6 +179,7 @@ function clearCompleted() {
 
   renderTodos();
   updateLeftItemCounter();
+  addToLocalStorage();
 }
 
 function filterTodos(e) {
@@ -163,6 +213,7 @@ function filterTodos(e) {
   }
 }
 
+// Local Storage Functions
 themeSwitchBtn.addEventListener("click", (e) => {
   const target = e.currentTarget;
   const currentTheme = target.dataset.currentTheme;
@@ -173,6 +224,8 @@ themeSwitchBtn.addEventListener("click", (e) => {
     headerMobileBg.style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-dark.jpg")';
+
+    localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.removeAttribute("data-theme");
     target.setAttribute("data-current-theme", "light");
@@ -180,5 +233,20 @@ themeSwitchBtn.addEventListener("click", (e) => {
       'url("./images/bg-mobile-light.jpg")';
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-light.jpg")';
+    localStorage.setItem("theme", "light");
   }
 });
+
+function addToLocalStorage() {
+  localStorage.setItem("todos", todoList.innerHTML);
+}
+
+function addEventListeners() {
+  todos.forEach((todo) => {
+    const removeBtn = todo.querySelector(".delete-btn");
+    removeBtn.addEventListener("click", removeTodo);
+
+    const completeBtn = todo.querySelector(".complete-todo-btn");
+    completeBtn.addEventListener("click", completeTodo);
+  });
+}

@@ -118,6 +118,11 @@ button {
   background-repeat: no-repeat;
 }
 
+.header-desktop-bg.hide,
+.header-mobile-bg.hide {
+  display: none;
+}
+
 .container {
   position: relative;
   z-index: 2;

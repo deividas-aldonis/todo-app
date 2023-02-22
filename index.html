@@ -15,9 +15,13 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+
+    <script>
+      if (localStorage.getItem("theme")) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
     <script type="module" src="app.js"></script>
 
     <link rel="stylesheet" href="style.css" />
@@ -25,8 +29,9 @@
   </head>
 
   <body>
-    <div class="header-mobile-bg"></div>
-    <div class="header-desktop-bg"></div>
+    <div class="hide header-mobile-bg"></div>
+    <div class="hide header-desktop-bg"></div>
+
     <div class="container">
       <header class="todo-header">
         <h1 class="todo-title prevent-select">todo</h1>
