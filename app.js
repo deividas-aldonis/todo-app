@@ -48,19 +48,13 @@ Sortable.create(todoList, {
 function checkForATheme() {
   const theme = localStorage.getItem("theme");
 
-  if (!theme) {
-    headerDesktopBg.classList.remove("hide");
-    headerMobileBg.classList.remove("hide");
-    return;
-  }
-
   if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
     themeSwitchBtn.setAttribute("data-current-theme", "dark");
     headerMobileBg.style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-dark.jpg")';
-  } else {
+  } else if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
     themeSwitchBtn.setAttribute("data-current-theme", "light");
     headerMobileBg.style.backgroundImage =
