@@ -87,7 +87,7 @@ button {
 
 /* HEADER */
 
-.header-background-image {
+.header-mobile-bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -97,6 +97,22 @@ button {
   width: 100%;
 
   background-image: url("./images/bg-mobile-light.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-desktop-bg {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  height: 260px;
+  width: 100%;
+
+  background-image: url("./images/bg-desktop-light.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -199,13 +215,11 @@ button {
 }
 
 /* TODO CONTAINER */
-
 .todo-container {
   margin: 24px 0;
   border-radius: 10px;
   overflow: hidden;
   background-color: var(--todo-container);
-
   box-shadow: var(--todo-container-shadow);
 }
 
@@ -214,6 +228,7 @@ button {
 }
 
 .todo-list {
+  overflow-y: auto;
   color: var(--dark-text);
   list-style-type: none;
 }
@@ -223,7 +238,7 @@ button {
   align-items: center;
   justify-content: space-between;
 
-  padding: 9px 10px;
+  padding: 18px 20px;
   border-bottom: 1px solid var(--light-text);
   cursor: pointer;
 }
@@ -237,49 +252,59 @@ button {
   text-decoration: line-through;
 }
 
-.todo-item.done .icon {
-  background: rgb(87, 221, 255);
-  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
-}
-
-.todo-item .icon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  padding: 1px;
-  background: none;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
-.todo-item:hover .icon::before {
-  background: linear-gradient(116deg, #57ddff, #c058f3);
-}
-
-.todo-item.done .icon,
-.todo-item:hover .icon {
-  border: 0;
-}
-
 .todo-item div:first-child {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
-.todo-item .icon-image {
+.complete-todo-btn {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%) border-box;
+  background: var(--light-text);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  height: 25px;
+  width: 25px;
+}
+
+.todo-item.done .complete-todo-btn {
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%) border-box;
+  mask-composite: unset;
+  -webkit-mask-composite: unset;
+}
+
+.complete-todo-btn:hover {
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%) border-box;
+}
+
+.complete-todo-icon {
   display: none;
+  background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
+  background-image: url(./images/icon-check.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+.todo-item.done .complete-todo-icon {
+  display: block;
 }
 
-.todo-item.done .icon-image {
-  display: flex;
+.delete-btn {
+  height: 25px;
+  width: 25px;
 }
 
-.delete {
-  width: 18px;
-  height: 18px;
-  fill: var(--delete-btn);
+.delete-icon {
+  background-image: url(./images/icon-cross.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .todo-footer {
@@ -312,67 +337,62 @@ button {
   border-radius: 6px;
 }
 
+.todo-footer-filter {
+  display: none;
+  gap: 16px;
+  font-weight: 700;
+}
+
 .todo-filter.hide {
   display: none;
 }
 
-.todo-filter button {
+.filter-btn {
   transition: color 0.1s ease;
 }
 
-.todo-filter button:hover {
+.filter-btn:hover {
   color: var(--dark-text);
 }
 
-.todo-filter button.active {
+.filter-btn.active {
   color: var(--bright-blue);
 }
 
 .dnd-tip {
   color: var(--normal-text);
   text-align: center;
-  margin-top: 50px;
+  margin: 50px 0;
 }
 
 .dnd-tip.hide {
   display: none;
 }
 
-.complete-todo-btn,
-.delete-btn {
-  padding: 12px;
+@media (min-width: 768px) {
+  .todo-filter {
+    display: none;
+  }
+
+  .todo-footer-filter {
+    display: flex;
+  }
+
+  .container {
+    width: 70%;
+  }
+
+  .header-desktop-bg {
+    display: block;
+  }
+
+  .header-mobile-bg {
+    display: none;
+  }
 }
 
-/* DND CLASSES */
-
-/* .sortable-ghost {
-  background: rgb(87, 221, 255);
-  background: linear-gradient(
-    166deg,
-    rgba(87, 221, 255, 1) 0%,
-    rgba(192, 88, 243, 1) 100%
-  );
-  opacity: 1;
-} */
-
-.todo-list.dragging .todo-item:hover .icon::before {
-  padding: 0px;
-  background: none;
-}
-
-.todo-list.dragging .todo-item:hover .icon {
-  border: 1px solid var(--icon-border-color);
-}
-
-.todo-list.dragging .todo-item.done:hover .icon {
-  border: none;
-}
-
-/* Hidden drag ghost list */
-.todo-list li {
-  background-color: var(--todo-container);
-}
-/* Hidden ghost in this list */
-.todo-list .sortable-drag {
-  opacity: 0;
+@media (min-width: 1024px) {
+  .container {
+    max-width: 650px;
+  }
 }

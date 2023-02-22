@@ -25,7 +25,8 @@
   </head>
 
   <body>
-    <div class="header-background-image"></div>
+    <div class="header-mobile-bg"></div>
+    <div class="header-desktop-bg"></div>
     <div class="container">
       <header class="todo-header">
         <h1 class="todo-title prevent-select">todo</h1>
@@ -54,38 +55,36 @@
         <ul class="todo-list"></ul>
         <div class="todo-footer">
           <p class="todo-left">0 items left</p>
+          <div class="todo-footer-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">
+              Completed
+            </button>
+          </div>
           <button class="clear-btn">clear completed</button>
         </div>
       </div>
 
       <div class="todo-filter hide prevent-select">
-        <button class="active" data-filter="all">All</button>
-        <button data-filter="active">Active</button>
-        <button data-filter="completed">Completed</button>
+        <button class="filter-btn" class="active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
       </div>
 
       <p class="dnd-tip hide">Drag and drop to reorder list</p>
     </div>
+    <!-- Todo Item Template -->
     <template>
       <div>
         <button class="complete-todo-btn">
-          <div class="icon prevent-select ignore-drag">
-            <img
-              class="icon-image"
-              src="./images/icon-check.svg"
-              alt="check icon"
-            />
-          </div>
+          <div class="complete-todo-icon"></div>
         </button>
         <p></p>
       </div>
-      <div class="delete-btn">
-        <svg class="delete ignore-drag" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-          />
-        </svg>
-      </div>
+      <button class="delete-btn">
+        <div class="delete-icon"></div>
+      </button>
     </template>
   </body>
 </html>

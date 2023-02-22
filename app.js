@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 const themeSwitchBtn = document.querySelector(".theme-switch-btn");
-const headerBackgroundImage = document.querySelector(
-  ".header-background-image"
-);
+const headerMobileBg = document.querySelector(".header-mobile-bg");
+const headerDesktopBg = document.querySelector(".header-desktop-bg");
 const todoContainer = document.querySelector(".todo-container");
 const todoFilter = document.querySelector(".todo-filter");
+const todoFooterFilter = document.querySelector(".todo-footer-filter");
 const todoDndTip = document.querySelector(".dnd-tip");
+const filterBtns = document.querySelectorAll(".filter-btn");
 
 const todoItemsLeft = document.querySelector(".todo-left");
 const todoList = document.querySelector(".todo-list");
@@ -21,6 +22,7 @@ let filter = "all";
 createTodoBtn.addEventListener("click", createTodo);
 clearBtn.addEventListener("click", clearCompleted);
 todoFilter.addEventListener("click", filterTodos);
+todoFooterFilter.addEventListener("click", filterTodos);
 
 Sortable.create(todoList, {
   animation: 150,
@@ -135,12 +137,16 @@ function filterTodos(e) {
 
   if (clicked === "div") return;
 
-  [...e.target.parentElement.children].forEach((btn) => {
-    btn.classList.remove("active");
-  });
-  e.target.classList.add("active");
-
   filter = e.target.dataset.filter;
+
+  filterBtns.forEach((btn) => {
+    if (btn.dataset.filter === filter) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+
   const todoItems = [...todoList.children];
   todoItems.forEach((todo) => todo.classList.remove("hide"));
 
@@ -164,12 +170,15 @@ themeSwitchBtn.addEventListener("click", (e) => {
   if (currentTheme === "light") {
     document.documentElement.setAttribute("data-theme", "dark");
     target.setAttribute("data-current-theme", "dark");
-    headerBackgroundImage.style.backgroundImage =
-      'url("./images/bg-mobile-dark.jpg")';
+    headerMobileBg.style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
+    headerDesktopBg.style.backgroundImage =
+      'url("./images/bg-desktop-dark.jpg")';
   } else {
     document.documentElement.removeAttribute("data-theme");
     target.setAttribute("data-current-theme", "light");
-    headerBackgroundImage.style.backgroundImage =
+    headerMobileBg.style.backgroundImage =
       'url("./images/bg-mobile-light.jpg")';
+    headerDesktopBg.style.backgroundImage =
+      'url("./images/bg-desktop-light.jpg")';
   }
 });
