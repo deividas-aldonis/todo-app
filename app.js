@@ -39,9 +39,8 @@ Sortable.create(todoList, {
 
   onEnd: function (evt) {
     todoList.classList.remove("dragging");
-
     todos = [...todoList.children];
-    localStorage.setItem("todos", todoList.innerHTML);
+    // localStorage.setItem("todos", todoList.innerHTML);
   },
 });
 
@@ -66,7 +65,7 @@ function checkForATheme() {
   headerDesktopBg.classList.remove("hide");
   headerMobileBg.classList.remove("hide");
 }
-checkForATheme();
+// checkForATheme();
 
 function checkForTodos() {
   const localStorageTodos = localStorage.getItem("todos");
@@ -81,7 +80,7 @@ function checkForTodos() {
   renderTodos();
   updateLeftItemCounter();
 }
-checkForTodos();
+// checkForTodos();
 
 function createTodo() {
   const temp = document.getElementsByTagName("template")[0];
@@ -108,7 +107,7 @@ function createTodo() {
 
   renderTodos();
   updateLeftItemCounter();
-  addToLocalStorage();
+  // addToLocalStorage();
 }
 
 function renderTodos() {
@@ -133,7 +132,7 @@ function removeTodo(e) {
 
   renderTodos();
   updateLeftItemCounter();
-  addToLocalStorage();
+  // addToLocalStorage();
 }
 
 function completeTodo(e) {
@@ -154,7 +153,7 @@ function completeTodo(e) {
   }
 
   updateLeftItemCounter();
-  addToLocalStorage();
+  // addToLocalStorage();
 }
 
 function updateLeftItemCounter() {
@@ -174,7 +173,7 @@ function clearCompleted() {
 
   renderTodos();
   updateLeftItemCounter();
-  addToLocalStorage();
+  // addToLocalStorage();
 }
 
 function filterTodos(e) {
@@ -220,7 +219,7 @@ themeSwitchBtn.addEventListener("click", (e) => {
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-dark.jpg")';
 
-    localStorage.setItem("theme", "dark");
+    // localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.removeAttribute("data-theme");
     target.setAttribute("data-current-theme", "light");
@@ -228,7 +227,8 @@ themeSwitchBtn.addEventListener("click", (e) => {
       'url("./images/bg-mobile-light.jpg")';
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-light.jpg")';
-    localStorage.setItem("theme", "light");
+
+    // localStorage.setItem("theme", "light");
   }
 });
 

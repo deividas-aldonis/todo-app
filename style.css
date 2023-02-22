@@ -376,11 +376,15 @@ button {
 
 .sortable-chosen {
   background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
-  opacity: 0.5 !important;
+  /* opacity: 0 !important; */
+}
+
+.sortable-ghost {
+  opacity: 1 !important;
 }
 
 .sortable-drag {
-  opacity: 1 !important;
+  opacity: 0 !important;
 }
 
 @media (min-width: 768px) {
