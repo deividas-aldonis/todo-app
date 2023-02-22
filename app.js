@@ -108,6 +108,8 @@ if (localStorageEnabled) {
 }
 
 function createTodo() {
+  if (addInput.value.trim().length < 1) return;
+
   const temp = document.getElementsByTagName("template")[0];
   const clone = temp.content.cloneNode(true);
 
