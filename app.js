@@ -28,44 +28,66 @@ Sortable.create(todoList, {
   animation: 150,
   delayOnTouchOnly: true,
   filter: ".ignore-drag",
+  forceFallback: true,
 
   ghostClass: "sortable-ghost",
   chosenClass: "sortable-chosen",
   dragClass: "sortable-drag",
 
-  onStart: function (evt) {
+  onChoose: function (e) {
+    e.target.classList.add("grabbing");
+  },
+  onUnchoose: function (e) {
+    e.target.classList.remove("grabbing");
+  },
+  onStart: function (e) {
+    e.target.classList.add("grabbing");
+  },
+  onEnd: function (e) {
+    e.target.classList.remove("grabbing");
+  },
+  onMove: function (e) {
+    e.target.classList.add("grabbing");
+  },
+
+  onStart: function () {
     todoList.classList.add("dragging");
   },
 
-  onEnd: function (evt) {
+  onEnd: function () {
     todoList.classList.remove("dragging");
     todos = [...todoList.children];
-    // localStorage.setItem("todos", todoList.innerHTML);
+    if (localStorageEnabled) {
+      localStorage.setItem("todos", todoList.innerHTML);
+    }
   },
 });
 
 function checkForATheme() {
-  const theme = localStorage.getItem("theme");
+  if (localStorageEnabled) {
+    const theme = localStorage.getItem("theme");
 
-  if (theme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeSwitchBtn.setAttribute("data-current-theme", "dark");
-    headerMobileBg.style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
-    headerDesktopBg.style.backgroundImage =
-      'url("./images/bg-desktop-dark.jpg")';
-  } else if (theme === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-    themeSwitchBtn.setAttribute("data-current-theme", "light");
-    headerMobileBg.style.backgroundImage =
-      'url("./images/bg-mobile-light.jpg")';
-    headerDesktopBg.style.backgroundImage =
-      'url("./images/bg-desktop-light.jpg")';
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      themeSwitchBtn.setAttribute("data-current-theme", "dark");
+      headerMobileBg.style.backgroundImage =
+        'url("./images/bg-mobile-dark.jpg")';
+      headerDesktopBg.style.backgroundImage =
+        'url("./images/bg-desktop-dark.jpg")';
+    } else if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      themeSwitchBtn.setAttribute("data-current-theme", "light");
+      headerMobileBg.style.backgroundImage =
+        'url("./images/bg-mobile-light.jpg")';
+      headerDesktopBg.style.backgroundImage =
+        'url("./images/bg-desktop-light.jpg")';
+    }
   }
 
   headerDesktopBg.classList.remove("hide");
   headerMobileBg.classList.remove("hide");
 }
-// checkForATheme();
+checkForATheme();
 
 function checkForTodos() {
   const localStorageTodos = localStorage.getItem("todos");
@@ -80,7 +102,10 @@ function checkForTodos() {
   renderTodos();
   updateLeftItemCounter();
 }
-// checkForTodos();
+
+if (localStorageEnabled) {
+  checkForTodos();
+}
 
 function createTodo() {
   const temp = document.getElementsByTagName("template")[0];
@@ -107,7 +132,10 @@ function createTodo() {
 
   renderTodos();
   updateLeftItemCounter();
-  // addToLocalStorage();
+
+  if (localStorageEnabled) {
+    addToLocalStorage();
+  }
 }
 
 function renderTodos() {
@@ -132,7 +160,9 @@ function removeTodo(e) {
 
   renderTodos();
   updateLeftItemCounter();
-  // addToLocalStorage();
+  if (localStorageEnabled) {
+    addToLocalStorage();
+  }
 }
 
 function completeTodo(e) {
@@ -153,7 +183,10 @@ function completeTodo(e) {
   }
 
   updateLeftItemCounter();
-  // addToLocalStorage();
+
+  if (localStorageEnabled) {
+    addToLocalStorage();
+  }
 }
 
 function updateLeftItemCounter() {
@@ -173,7 +206,10 @@ function clearCompleted() {
 
   renderTodos();
   updateLeftItemCounter();
-  // addToLocalStorage();
+
+  if (localStorageEnabled) {
+    addToLocalStorage();
+  }
 }
 
 function filterTodos(e) {
@@ -219,7 +255,9 @@ themeSwitchBtn.addEventListener("click", (e) => {
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-dark.jpg")';
 
-    // localStorage.setItem("theme", "dark");
+    if (localStorageEnabled) {
+      localStorage.setItem("theme", "dark");
+    }
   } else {
     document.documentElement.removeAttribute("data-theme");
     target.setAttribute("data-current-theme", "light");
@@ -228,7 +266,9 @@ themeSwitchBtn.addEventListener("click", (e) => {
     headerDesktopBg.style.backgroundImage =
       'url("./images/bg-desktop-light.jpg")';
 
-    // localStorage.setItem("theme", "light");
+    if (localStorageEnabled) {
+      localStorage.setItem("theme", "light");
+    }
   }
 });
 

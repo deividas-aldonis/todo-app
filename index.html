@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
 
-    <!-- Fix button click on mobile -->
-    <!-- Hide ghost image on drag -->
-    <!-- Add desktop layout -->
-
     <link
       rel="icon"
       type="image/png"
@@ -17,9 +13,26 @@
     />
 
     <script>
-      // if (localStorage.getItem("theme")) {
-      //   document.documentElement.setAttribute("data-theme", "dark");
-      // }
+      const isLocalStorageIsEnabled = () => {
+        try {
+          const key = `__storage__test`;
+          window.localStorage.setItem(key, null);
+          window.localStorage.removeItem(key);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      };
+
+      const localStorageEnabled = isLocalStorageIsEnabled();
+
+      if (localStorageEnabled) {
+        const theme = localStorage.getItem("theme");
+
+        if (theme === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script type="module" src="app.js"></script>
@@ -29,8 +42,8 @@
   </head>
 
   <body>
-    <div class="header-mobile-bg"></div>
-    <div class="header-desktop-bg"></div>
+    <div class="hide header-mobile-bg"></div>
+    <div class="hide header-desktop-bg"></div>
 
     <div class="container">
       <header class="todo-header">
@@ -72,7 +85,7 @@
       </div>
 
       <div class="todo-filter hide prevent-select">
-        <button class="filter-btn" class="active" data-filter="all">All</button>
+        <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="active">Active</button>
         <button class="filter-btn" data-filter="completed">Completed</button>
       </div>

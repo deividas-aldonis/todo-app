@@ -245,7 +245,7 @@ button {
 
   padding: 18px 20px;
   border-bottom: 1px solid var(--light-text);
-  cursor: pointer;
+  cursor: grab;
 }
 
 .todo-item.hide {
@@ -374,9 +374,10 @@ button {
   display: none;
 }
 
+/* Sortable js related classes */
+
 .sortable-chosen {
   background: linear-gradient(116deg, #57ddff 0%, #c058f3 100%);
-  /* opacity: 0 !important; */
 }
 
 .sortable-ghost {
@@ -385,6 +386,14 @@ button {
 
 .sortable-drag {
   opacity: 0 !important;
+}
+
+.grabbing {
+  cursor: default !important;
+}
+
+.grabbing * {
+  cursor: grabbing !important;
 }
 
 @media (min-width: 768px) {
