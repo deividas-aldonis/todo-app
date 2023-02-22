@@ -238,9 +238,6 @@ button {
   list-style-type: none;
 }
 
-.todo-list.dragging .todo-item {
-}
-
 .todo-item {
   display: flex;
   align-items: center;
